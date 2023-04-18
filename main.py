@@ -10,11 +10,12 @@ AWX_TOKEN = os.environ.get('AWX_TOKEN')
 FAILED_STATUSES = {"failed", "error", "canceled"}
 CHECKS_DELAY = os.environ.get('CHECKS_DELAY', 10)
 # todo: replace by environment variable
-PROJECTS_ID_TO_CHECK = [] # awx projects ID
+PROJECTS_ID_TO_CHECK = []  # awx projects ID
 
 
 def get_project_info(project_id, session):
-    project_info = session.get(f"{AWX_URL}/api/v2/projects/{project_id}", headers={'Authorization': f'Bearer {AWX_TOKEN}'})
+    project_info = session.get(f"{AWX_URL}/api/v2/projects/{project_id}",
+                               headers={'Authorization': f'Bearer {AWX_TOKEN}'})
     if project_info.status_code < 400:
         return project_info.json()
     else:
